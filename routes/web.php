@@ -1,20 +1,15 @@
-<?php use Illuminate\Routing\Router;
-
-/**
- *
- * @var Router $router
- *
- */
+<?php
+use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
 
 /**
  * Admin routes
  */
-
 $adminRoute = config('webed.admin_route');
 
 $moduleRoute = 'blocks';
 
-$router->group(['prefix' => $adminRoute . '/' . $moduleRoute], function (Router $router) use ($adminRoute, $moduleRoute) {
+Route::group(['prefix' => $adminRoute . '/' . $moduleRoute], function (Router $router) use ($adminRoute, $moduleRoute) {
     $router->get('/', 'BlockController@getIndex')
         ->name('admin::blocks.index.get')
         ->middleware('has-permission:view-blocks');
@@ -37,7 +32,7 @@ $router->group(['prefix' => $adminRoute . '/' . $moduleRoute], function (Router 
 
     $router->get('edit/{id}', 'BlockController@getEdit')
         ->name('admin::blocks.edit.get')
-        ->middleware('has-permission:edit-blocks');
+        ->middleware('has-permission:view-blocks');
 
     $router->post('edit/{id}', 'BlockController@postEdit')
         ->name('admin::blocks.edit.post')

@@ -4,6 +4,6 @@
     "author": "Tedozi Manson",
     "description": "WebEd CMS blocks",
     "namespace": "WebEd\\Plugins\\Blocks",
-    "version": "1.0",
+    "version": "2.1.0",
     "autoload": "psr-4"
 }
