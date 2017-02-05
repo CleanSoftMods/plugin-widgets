@@ -63,10 +63,11 @@ class BootstrapModuleServiceProvider extends ServiceProvider
                      * @var BlockRepository $blockRepo
                      */
                     $blockRepo = app(BlockRepositoryContract::class);
+
                     /**
                      * @var Collection $blocks
                      */
-                    $blocks = $blockRepo->all();
+                    $blocks = $blockRepo->select('title', 'id')->get();
                     return $blocks->pluck('title', 'id')->toArray();
                 })
                 ->registerRule('Other', 'Model name', 'model_name', [

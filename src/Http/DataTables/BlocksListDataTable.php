@@ -1,21 +1,19 @@
 <?php namespace WebEd\Plugins\Blocks\Http\DataTables;
 
+use Illuminate\Database\Eloquent\Builder;
 use WebEd\Base\Core\Http\DataTables\AbstractDataTables;
-use WebEd\Plugins\Blocks\Repositories\BlockRepository;
-use WebEd\Plugins\Blocks\Repositories\Contracts\BlockRepositoryContract;
+use WebEd\Plugins\Blocks\Models\Block;
 
 class BlocksListDataTable extends AbstractDataTables
 {
     /**
-     * @var BlockRepository
+     * @var Block|Builder
      */
-    protected $repository;
+    protected $model;
 
-    public function __construct(BlockRepositoryContract $repository)
+    public function __construct()
     {
-        $this->repository = $repository;
-
-        $this->repository->select('id', 'page_template', 'status', 'title', 'created_at');
+        $this->model = Block::select('id', 'page_template', 'status', 'title', 'created_at');
 
         parent::__construct();
     }
@@ -75,7 +73,7 @@ class BlocksListDataTable extends AbstractDataTables
      */
     protected function fetch()
     {
-        $this->fetch = datatable()->of($this->repository)
+        $this->fetch = datatable()->of($this->model)
             ->addColumn('shortcode', function ($item) {
                 return $item->shortcode;
             })
