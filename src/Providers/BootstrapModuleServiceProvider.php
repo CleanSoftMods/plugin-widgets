@@ -67,7 +67,7 @@ class BootstrapModuleServiceProvider extends ServiceProvider
                     /**
                      * @var Collection $blocks
                      */
-                    $blocks = $blockRepo->select('title', 'id')->get();
+                    $blocks = $blockRepo->select(['title', 'id'])->get();
                     return $blocks->pluck('title', 'id')->toArray();
                 })
                 ->registerRule('Other', 'Model name', 'model_name', [

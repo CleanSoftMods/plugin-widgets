@@ -57,11 +57,11 @@ class BlockController extends BaseAdminController
      * Handle group actions
      * @return array
      */
-    private function groupAction()
+    protected function groupAction()
     {
         $data = [];
         if ($this->request->get('customActionType', null) === 'group_action') {
-            if (!$this->userRepository->hasPermission($this->loggedInUser, 'edit-blocks')) {
+            if (!$this->userRepository->hasPermission($this->loggedInUser, ['edit-blocks'])) {
                 return [
                     'customActionMessage' => 'You do not have permission',
                     'customActionStatus' => 'danger',
@@ -73,7 +73,7 @@ class BlockController extends BaseAdminController
 
             switch ($actionValue) {
                 case 'deleted':
-                    if (!$this->userRepository->hasPermission($this->loggedInUser, 'delete-blocks')) {
+                    if (!$this->userRepository->hasPermission($this->loggedInUser, ['delete-blocks'])) {
                         return [
                             'customActionMessage' => 'You do not have permission',
                             'customActionStatus' => 'danger',
